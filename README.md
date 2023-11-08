@@ -36,11 +36,12 @@ Technology stack:
 ### Model training 
 _choose one of the following trining options_
 
-1. Jupyter notebook was used for the model development. To review the model setup and trainig spin up the development environment:
+1. Jupyter notebook was used for the model development. The notebook can be reviwed in the [GitHub repo](src/pycaret_train.ipynb) or on a local machine at http://localhost:8888/lab/tree/pycaret_train.ipynb .  
+   To reproduce the model setup and trainig spin up the development environment:
 ```sh
 docker-compose up --build jupyter-lab
 ```
-The notebook opens up at http://localhost:8888/lab/tree/pycaret_train.ipynb
+
 
 2. A better option is to run a trainig script which converts provided notebook to python script, runs the model training, make an API and pack it as a Docker container
 ```sh
