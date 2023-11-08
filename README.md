@@ -57,7 +57,7 @@ mv src/requirements.txt services/deploy
 mv src/smoking_clf_api.pkl services/deploy
 mv src/smoking_clf_api.py services/deploy
 
-docker-compose up --build deployment
+docker-compose up --build deploy
 ```
 The API is available at http://localhost:7777/docs
 
