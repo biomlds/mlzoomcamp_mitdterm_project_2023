@@ -40,7 +40,7 @@ _choose one of the following trining options_
 ```sh
 docker-compose up --build jupyter-lab
 ```
-The notebook opens up at http://localhost:8888/lab/tree/pycaret_train.ipynb
+Ope notebook is at http://localhost:8888/lab
 
 2. A better option is to run a trainig script which converts provided notebook to python script, runs the model training, make an API and pack it as a Docker container
 ```sh
@@ -50,7 +50,7 @@ docker-compose up --build train
 - [CatBoost](https://catboost.ai/) classifier achived the best AUC score of `0.8651`
 
 ### Model deployment
-- To deploy the model locally as an api execute the following:
+- To deploy the model locally as an api start the container:
 ```sh
 mv src/Dockerfile services/deploy
 mv src/requirements.txt services/deploy
@@ -62,4 +62,4 @@ docker-compose up --build deployment
 The API is available at http://localhost:7777/docs
 
 - Alternatively, the dockerized model can be deployed in the cloud. 
-[This link](https://pycaret.gitbook.io/docs/learn-pycaret/official-blog/deploy-machine-learning-pipeline-on-aws-fargate) provides detailed instructions on how to deploy ML pipeline on AWS Fargate.
+[This links](https://pycaret.gitbook.io/docs/learn-pycaret/official-blog/deploy-machine-learning-pipeline-on-aws-fargate) provides detailed instructions on how to deploy ML pipeline on AWS Fargate.
