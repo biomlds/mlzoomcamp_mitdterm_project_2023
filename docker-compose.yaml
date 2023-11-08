@@ -1,0 +1,37 @@
+version: "3.7"
+
+services:
+  jupyter-lab:
+    build: ./services/dev
+    image: dev
+    container_name: jupyter-lab
+    volumes:
+      - .:/workspace:cached
+    working_dir: /workspace/src
+    environment:
+      - JUPYTER_TOKEN=${ACCESS_TOKEN}
+    tty: true
+    ports:
+      - "8888:8888"
+    entrypoint: /bin/bash -c "jupyter-lab   --port=8888 --no-browser --ip='0.0.0.0' --allow-root --NotebookApp.token='${JUPYTER_TOKEN}' "
+
+  train:
+    build: ./services/dev
+    image: dev
+    container_name: train
+    volumes:
+      - .:/workspace:cached
+    working_dir: /workspace/src
+    tty: true
+    # ports:
+    #   - "8000:8000"
+    entrypoint: /bin/bash train.sh
+    # entrypoint: python pycaret_train.py
+    # entrypoint: python smoking_clf_api.py
+
+  deploy:
+    build: ./services/deploy
+    image: deploy
+    container_name: deploy
+    ports:
+      - "7777:8000"

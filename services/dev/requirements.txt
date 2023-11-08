@@ -1,0 +1,5 @@
+#pycaret
+#scikit-learn-intelex
+pycaret[models,mlops]
+jupyterlab
+#autoviz

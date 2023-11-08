@@ -1,0 +1,9 @@
+
+*.Trash-1000
+.vscode
+.devcontainer
+__pycache__/
+*catboost_info
+*.DS_Store
+src/logs.log
+*.ipynb_checkpoints
