@@ -60,7 +60,8 @@ mv src/smoking_clf_api.py services/deploy
 
 docker-compose up --build deployment
 ```
-The API is available at http://localhost:7777/docs
+The API is available at http://localhost:7777/docs#/default/predict_predict_post   
 
+![FastAPI](src/fastapi_screenshot.jpg)   
 - Alternatively, the dockerized model can be deployed in the cloud. 
-[This link](https://pycaret.gitbook.io/docs/learn-pycaret/official-blog/deploy-machine-learning-pipeline-on-aws-fargate) provides detailed instructions on how to deploy ML pipeline on AWS Fargate.
+[This link](https://pycaret.gitbook.io/docs/learn-pycaret/official-blog/deploy-machine-learning-pipeline-on-aws-fargate) provides detailed instructions on how to deploy ML pipeline on `AWS Fargate`.
