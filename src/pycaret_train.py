@@ -9,8 +9,8 @@ import pycaret
 import seaborn as sns
 import pandas as pd
 import matplotlib.pyplot as plt
-from sklearnex import patch_sklearn
-patch_sklearn()
+# from sklearnex import patch_sklearn
+# patch_sklearn()
 from pycaret.classification import *
 
 
