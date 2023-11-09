@@ -6,22 +6,17 @@
 
 import os
 import pycaret
+import seaborn as sns
 import pandas as pd
 import matplotlib.pyplot as plt
-# from sklearnex import patch_sklearn
-# patch_sklearn()
+from sklearnex import patch_sklearn
+patch_sklearn()
 from pycaret.classification import *
-
-
-# In[3]:
-
-
-pycaret.__version__
 
 
 # #### Load data
 
-# In[4]:
+# In[2]:
 
 
 train = pd.read_csv('../data/train.csv')
@@ -30,13 +25,13 @@ train.shape
 
 # #### Check data stats, missing values
 
-# In[5]:
+# In[3]:
 
 
 train.describe().T
 
 
-# In[6]:
+# In[4]:
 
 
 train.info()
@@ -44,7 +39,7 @@ train.info()
 
 # #### Pycaret will generate polynomial features. Let's add several extra features
 
-# In[7]:
+# In[5]:
 
 
 train['bmi'] = 10000*train['weight(kg)']/train['height(cm)']/train['height(cm)']
@@ -54,7 +49,7 @@ train['totalDL'] = train['HDL'] + train['LDL']
 
 # #### Check for categorical features
 
-# In[8]:
+# In[6]:
 
 
 for ft in train.columns:
@@ -68,7 +63,7 @@ print(45*'=')
 
 # `dental caries` is the binary feature. The rest can be treated as numerical ones.
 
-# In[9]:
+# In[7]:
 
 
 ignore_features = ['id']
@@ -83,7 +78,7 @@ for fetaure in categorical_features+ignore_features+[TARGET]:
 
 # #### Setup pycaret experiment
 
-# In[10]:
+# In[8]:
 
 
 s = setup(train,
@@ -110,16 +105,9 @@ s = setup(train,
 
 # #### Let's run a set of models and pick the best one
 
-# In[11]:
+# In[9]:
 
 
-models()
-
-
-# In[12]:
-
-
-best = compare_models(include = ['catboost', 'lightgbm', 'lr', 'dummy'])
 best = compare_models()
 
 
@@ -127,19 +115,19 @@ best = compare_models()
 
 # #### Tune the best model
 
-# In[14]:
+# In[10]:
 
 
-tuned_best = tune_model(best)
+tuned_best = tune_model(best, search_library = 'scikit-learn')
 
 
-# In[16]:
+# In[11]:
 
 
 print(tuned_best)
 
 
-# In[15]:
+# In[12]:
 
 
 plot_model(tuned_best)
@@ -147,7 +135,7 @@ plot_model(tuned_best)
 
 # #### Top 10 important features
 
-# In[16]:
+# In[13]:
 
 
 plot_model(tuned_best, plot = 'feature')
@@ -156,7 +144,7 @@ plot_model(tuned_best, plot = 'feature')
 # #### Here is the confusion matrix
 # The model is good enough.
 
-# In[17]:
+# In[14]:
 
 
 plot_model(tuned_best, plot = 'confusion_matrix', plot_kwargs = {'percent' : True})
@@ -164,24 +152,15 @@ plot_model(tuned_best, plot = 'confusion_matrix', plot_kwargs = {'percent' : Tru
 
 # #### Deploy the model as API in a docker container
 
-# In[33]:
+# In[16]:
 
 
-import joblib
-joblib.dump(tuned_best, 'tuned_best.pkl')
-joblib.dump(tuned_best, 'best.pkl')
-
-
-# In[19]:
-
-
-#!pip install pycaret[mlops]
 # create api
-create_api(best, 'smoking_clf_api')
+create_api(tuned_best, 'smoking_clf_api')
 
 
 
-# In[20]:
+# In[17]:
 
 
 # create docker
