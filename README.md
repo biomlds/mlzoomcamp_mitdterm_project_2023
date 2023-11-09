@@ -53,11 +53,6 @@ docker-compose up --build train
 ### Model deployment
 - To deploy the model locally as an api execute the following:
 ```sh
-mv src/Dockerfile services/deploy
-mv src/requirements.txt services/deploy
-mv src/smoking_clf_api.pkl services/deploy
-mv src/smoking_clf_api.py services/deploy
-
 docker-compose up --build deployment
 ```
 The API is available at http://localhost:7777/docs#/default/predict_predict_post   

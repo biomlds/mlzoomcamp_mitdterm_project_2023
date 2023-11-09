@@ -22,12 +22,7 @@ services:
     volumes:
       - .:/workspace:cached
     working_dir: /workspace/src
-    tty: true
-    # ports:
-    #   - "8000:8000"
-    entrypoint: /bin/bash train.sh
-    # entrypoint: python pycaret_train.py
-    # entrypoint: python smoking_clf_api.py
+    entrypoint: /bin/bash entrypoint.sh
 
   deploy:
     build: ./services/deploy
